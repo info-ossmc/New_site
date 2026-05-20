@@ -1,0 +1,52 @@
+---
+import { assets, nav, company } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--color-night)] text-[var(--color-light)]">
+  <div class="container-x py-16 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <img
+        src={assets.logo}
+        alt={`${company.name} – ${company.tagline}`}
+        class="h-10 w-auto"
+        style="filter: brightness(0) invert(1);"
+        width="180"
+        height="40"
+        loading="lazy"
+      />
+      <p class="mt-6 max-w-sm text-sm leading-relaxed text-[var(--color-light)]/80">
+        An elite private chef placement agency connecting Michelin-trained talent
+        with the world's most distinguished households.
+      </p>
+    </div>
+
+    <nav aria-label="Footer">
+      <h3 class="font-display text-base tracking-[0.18em] uppercase text-[var(--color-paper)] mb-5">Explore</h3>
+      <ul class="space-y-3 text-sm">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="hover:text-[var(--color-accent)] transition-colors">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <h3 class="font-display text-base tracking-[0.18em] uppercase text-[var(--color-paper)] mb-5">Contact</h3>
+      <ul class="space-y-3 text-sm">
+        <li>
+          <a href={`mailto:${company.email}`} class="hover:text-[var(--color-accent)] transition-colors">{company.email}</a>
+        </li>
+        <li class="text-[var(--color-light)]/80">London · Worldwide Placement</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-x py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-light)]/60">
+      <p>© {year} {company.name}. All rights reserved.</p>
+      <p>{company.tagline}</p>
+    </div>
+  </div>
+</footer>

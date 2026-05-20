@@ -1,0 +1,30 @@
+---
+import { assets, company } from "../data/site";
+---
+
+<section id="contact" class="relative py-[var(--spacing-section)] text-[var(--color-paper)]">
+  <div class="absolute inset-0 -z-10">
+    <img
+      src={assets.belgravia}
+      alt="A street in Belgravia, London"
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[var(--color-night)]/85"></div>
+  </div>
+
+  <div class="container-x text-center max-w-3xl mx-auto reveal">
+    <p class="eyebrow mb-6">Begin the Conversation</p>
+    <h2 class="text-[clamp(2.2rem,5vw,4rem)] font-light leading-[1.05]">
+      Your next chef begins with a private conversation
+    </h2>
+    <p class="mt-6 text-[var(--color-light)] text-lg max-w-xl mx-auto">
+      Tell us about your household and the standard you expect. Every enquiry is
+      handled personally and in complete confidence.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4 justify-center">
+      <a href={`mailto:${company.email}`} class="btn btn-accent">{company.cta}</a>
+      <a href={`mailto:${company.email}`} class="btn btn-light">{company.email}</a>
+    </div>
+  </div>
+</section>

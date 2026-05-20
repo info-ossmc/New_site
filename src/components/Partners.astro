@@ -1,0 +1,22 @@
+---
+import { partners } from "../data/site";
+const loop = [...partners, ...partners];
+---
+
+<section id="partners" class="py-14 bg-[var(--color-mist)] border-y border-black/5 overflow-hidden">
+  <div class="container-x">
+    <p class="eyebrow text-center mb-10">Trained &amp; trusted by the world's finest</p>
+  </div>
+  <div class="marquee relative">
+    <div class="marquee-track items-center gap-16 md:gap-24 px-8">
+      {loop.map((p) => (
+        <img
+          src={p.src}
+          alt={p.name}
+          class="h-10 md:h-12 w-auto object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition duration-300"
+          loading="lazy"
+        />
+      ))}
+    </div>
+  </div>
+</section>

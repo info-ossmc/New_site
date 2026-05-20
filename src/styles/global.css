@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/* ---- Brand fonts (served from existing CDN) ---- */
+@font-face {
+  font-family: "Beautique Display";
+  src: url("https://cdn.prod.website-files.com/6810a1a5d2a21214dff2e16b/6897114d17bd728a07fed1da_BeautiqueDisplay-Condensed.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Beautique Display";
+  src: url("https://cdn.prod.website-files.com/6810a1a5d2a21214dff2e16b/689714b218d867bb791e70dd_BeautiqueDisplay-CondensedLight.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mona Sans";
+  src: url("https://cdn.prod.website-files.com/6810a1a5d2a21214dff2e16b/68977cd5cd9e802e5399310f_mona-sans-v3-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Mona Sans";
+  src: url("https://cdn.prod.website-files.com/6810a1a5d2a21214dff2e16b/68977cd59827aec266c37faf_mona-sans-v3-latin-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Design tokens ---- */
+@theme {
+  --color-ink: #11171b;
+  --color-slate: #5e6265;
+  --color-accent: #e9a668;
+  --color-gold: #a88e4a;
+  --color-night: #0e1824;
+  --color-light: #d9d9d9;
+  --color-paper: #ffffff;
+  --color-mist: #f5f4f1;
+
+  --font-display: "Beautique Display", Georgia, serif;
+  --font-body: "Mona Sans", Arial, sans-serif;
+
+  --spacing-section: 100px;
+  --container-max: 1280px;
+
+  --radius-md: 12px;
+}
+
+/* ---- Base ---- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.66;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+/* ---- Reusable primitives ---- */
+.container-x {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 60px);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 14px 40px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+  cursor: pointer;
+}
+.btn-dark { color: var(--color-ink); }
+.btn-dark:hover { background: var(--color-ink); color: var(--color-paper); }
+.btn-light { color: var(--color-paper); border-color: var(--color-paper); }
+.btn-light:hover { background: var(--color-paper); color: var(--color-ink); }
+.btn-accent { color: var(--color-ink); border-color: var(--color-accent); background: var(--color-accent); }
+.btn-accent:hover { background: transparent; color: var(--color-accent); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---- Marquee ---- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }

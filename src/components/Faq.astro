@@ -1,0 +1,42 @@
+---
+import { faqs } from "../data/site";
+---
+
+<section id="faq" class="py-[var(--spacing-section)]">
+  <div class="container-x grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-start">
+    <div class="reveal lg:sticky lg:top-32">
+      <p class="eyebrow mb-5">Frequently Asked</p>
+      <h2 class="text-[clamp(2rem,4.5vw,3.4rem)] font-light">
+        Answers, in confidence
+      </h2>
+      <p class="mt-5 text-[var(--color-slate)]">
+        Discretion guides everything we do. If your question isn't answered here,
+        a private conversation is only a message away.
+      </p>
+    </div>
+
+    <div class="reveal">
+      {faqs.map((f) => (
+        <details class="faq-item group border-b border-[var(--color-ink)]/20 first:border-t">
+          <summary
+            class="flex items-center justify-between gap-6 cursor-pointer list-none py-7 text-lg md:text-xl font-display font-light select-none"
+          >
+            <span>{f.q}</span>
+            <span class="faq-icon shrink-0 relative w-5 h-5" aria-hidden="true">
+              <span class="absolute top-1/2 left-0 w-5 h-px bg-current -translate-y-1/2"></span>
+              <span class="faq-bar absolute top-1/2 left-1/2 w-px h-5 bg-current -translate-x-1/2 -translate-y-1/2 transition-transform duration-300"></span>
+            </span>
+          </summary>
+          <div class="pb-7 -mt-1 text-[var(--color-slate)] max-w-2xl leading-relaxed">
+            {f.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  details[open] .faq-bar { transform: translate(-50%, -50%) scaleY(0); }
+  summary::-webkit-details-marker { display: none; }
+</style>

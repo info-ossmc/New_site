@@ -1,0 +1,51 @@
+---
+import { assets, stats } from "../data/site";
+---
+
+<section id="founder" class="py-[var(--spacing-section)] bg-[var(--color-mist)]">
+  <div class="container-x grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+    <div class="reveal">
+      <div class="relative">
+        <img
+          src={assets.founder}
+          alt="Chris Demaillet, Michelin-trained chef and founder of Montclair Chef"
+          class="w-full object-cover aspect-[4/5]"
+          loading="lazy"
+        />
+        <div class="absolute -bottom-6 -right-4 sm:right-6 bg-[var(--color-night)] text-[var(--color-paper)] px-8 py-6 max-w-[260px]">
+          <p class="font-display text-xl font-light leading-tight">Chris Demaillet</p>
+          <p class="text-[var(--color-light)] text-[13px] tracking-wide mt-1">Founder · Michelin-Trained Chef</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="eyebrow mb-5">Our Founder</p>
+      <h2 class="text-[clamp(2rem,4.5vw,3.4rem)] font-light">
+        A chef's eye for talent, a host's sense of discretion
+      </h2>
+      <div class="mt-6 space-y-5 text-[var(--color-slate)]">
+        <p>
+          Montclair Chef was founded by Chris Demaillet, a Michelin-trained chef
+          whose career in the world's finest kitchens shaped an unwavering belief:
+          that exceptional private dining begins with exceptional people.
+        </p>
+        <p>
+          Having cooked for discerning households himself, Chris understands what
+          truly matters to a principal family — not only flawless cuisine, but
+          trust, consistency and absolute discretion. Every chef we place is chosen
+          through that lens.
+        </p>
+      </div>
+
+      <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-4 border-t border-black/10 pt-8">
+        {stats.map((s) => (
+          <div>
+            <dt class="font-display text-2xl md:text-3xl font-light text-[var(--color-ink)]">{s.value}</dt>
+            <dd class="text-[13px] tracking-wide text-[var(--color-slate)] mt-1">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

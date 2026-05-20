@@ -1,0 +1,41 @@
+---
+import { assets, testimonials } from "../data/site";
+---
+
+<section id="clients" class="relative py-[var(--spacing-section)] text-[var(--color-paper)]">
+  <div class="absolute inset-0 -z-10">
+    <img
+      src={assets.townhouse}
+      alt="A luxury London townhouse exterior"
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[var(--color-night)]/80"></div>
+  </div>
+
+  <div class="container-x">
+    <div class="max-w-2xl reveal">
+      <p class="eyebrow mb-5">In Their Words</p>
+      <h2 class="text-[clamp(2rem,4.5vw,3.4rem)] font-light">
+        Trusted by the households we serve
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-8 md:grid-cols-2">
+      {testimonials.map((t, i) => (
+        <figure
+          class="border border-white/15 p-8 md:p-10 bg-white/[0.03] backdrop-blur-sm reveal"
+          style={`transition-delay:${i * 100}ms`}
+        >
+          <img src={assets.star} alt="Five-star rating" class="h-5 w-auto mb-6" loading="lazy" />
+          <blockquote class="font-display text-xl md:text-2xl font-light leading-snug">
+            “{t.quote}”
+          </blockquote>
+          <figcaption class="mt-7 text-[var(--color-light)] text-sm tracking-wide">
+            <span class="text-[var(--color-paper)]">{t.author}</span> · {t.location}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

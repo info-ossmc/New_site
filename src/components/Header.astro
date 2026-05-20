@@ -1,0 +1,120 @@
+---
+import { assets, nav, company } from "../data/site";
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300"
+  data-state="top"
+>
+  <div class="container-x flex items-center justify-between h-20 md:h-24">
+    <a href="#top" class="flex items-center shrink-0" aria-label={`${company.name} home`}>
+      <img
+        src={assets.logo}
+        alt={`${company.name} – ${company.tagline}`}
+        class="h-9 md:h-10 w-auto site-logo"
+        width="180"
+        height="40"
+      />
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-9" aria-label="Primary">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="nav-link text-[13px] font-medium tracking-[0.16em] uppercase transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="hidden lg:block">
+      <a href="#contact" class="btn nav-cta">{company.cta}</a>
+    </div>
+
+    <button
+      id="menu-toggle"
+      class="lg:hidden inline-flex flex-col justify-center items-center w-10 h-10 gap-[5px]"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="block w-6 h-px bg-current transition-transform"></span>
+      <span class="block w-6 h-px bg-current transition-opacity"></span>
+      <span class="block w-6 h-px bg-current transition-transform"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-0 top-20 bg-[var(--color-night)] text-[var(--color-paper)] translate-x-full transition-transform duration-300 ease-out"
+  >
+    <nav class="container-x flex flex-col gap-2 pt-10" aria-label="Mobile">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-link py-4 text-2xl font-display font-light border-b border-white/10"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href="#contact" class="btn btn-accent mt-8 self-start">{company.cta}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Default (over hero) = light text on transparent */
+  #site-header[data-state="top"] { background: transparent; }
+  #site-header[data-state="top"] .nav-link,
+  #site-header[data-state="top"] #menu-toggle { color: var(--color-paper); }
+  #site-header[data-state="top"] .nav-cta { color: var(--color-paper); border-color: rgba(255,255,255,.7); }
+  #site-header[data-state="top"] .nav-cta:hover { background: var(--color-paper); color: var(--color-ink); }
+
+  /* Scrolled = light background, dark text, subtle shadow */
+  #site-header[data-state="scrolled"] {
+    background: var(--color-paper);
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+  }
+  #site-header[data-state="scrolled"] .nav-link,
+  #site-header[data-state="scrolled"] #menu-toggle { color: var(--color-ink); }
+  #site-header[data-state="scrolled"] .site-logo { filter: none; }
+  #site-header[data-state="scrolled"] .nav-cta { color: var(--color-ink); border-color: var(--color-ink); }
+  #site-header[data-state="scrolled"] .nav-cta:hover { background: var(--color-ink); color: var(--color-paper); }
+
+  /* Logo is dark artwork: invert it while over the dark hero */
+  #site-header[data-state="top"] .site-logo { filter: brightness(0) invert(1); }
+
+  .nav-link:hover { color: var(--color-accent); }
+
+  #menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  #menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  #menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  #mobile-menu.open { transform: translateX(0); }
+</style>
+
+<script>
+  const header = document.getElementById("site-header")!;
+  const onScroll = () => {
+    header.dataset.state = window.scrollY > 40 ? "scrolled" : "top";
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const toggle = document.getElementById("menu-toggle")!;
+  const menu = document.getElementById("mobile-menu")!;
+  const closeMenu = () => {
+    menu.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  };
+  toggle.addEventListener("click", () => {
+    const open = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+</script>
